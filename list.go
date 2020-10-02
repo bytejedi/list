@@ -13,7 +13,7 @@ type List struct {
 }
 
 func New() *List {
-	return &List{list:list.New()}
+	return &List{list: list.New()}
 }
 
 func (l *List) Back() *list.Element {
@@ -83,10 +83,10 @@ func (l *List) PushBack(v interface{}) *list.Element {
 	return l.list.PushBack(v)
 }
 
-func (l *List) PushBackList(other *list.List) {
+func (l *List) PushBackList(other *List) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
-	l.list.PushBackList(other)
+	l.list.PushBackList(other.list)
 }
 
 func (l *List) PushFront(v interface{}) *list.Element {
@@ -95,13 +95,13 @@ func (l *List) PushFront(v interface{}) *list.Element {
 	return l.list.PushFront(v)
 }
 
-func (l *List) PushFrontList(other *list.List) {
+func (l *List) PushFrontList(other *List) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
-	l.list.PushFrontList(other)
+	l.list.PushFrontList(other.list)
 }
 
-func (l *List) Remove(e * list.Element) interface{} {
+func (l *List) Remove(e *list.Element) interface{} {
 	l.mu.Lock()
 	defer l.mu.Unlock()
 	return l.list.Remove(e)
